@@ -17,7 +17,10 @@ export default function Header({title,description,onPressProfile}) {
 
       {/*Title and Decscription*/}
 
-      <View style={appStyle.container}>
+      <View style={StyleSheet.flatten([
+        appStyle.container,
+        styles.textView
+      ])}>
 
         <TextElement h4 medium h4Style={{}}>{title}</TextElement>
         <TextElement h7 medium h7Style={{color:Color.grey}}>{description}</TextElement>
@@ -62,7 +65,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderWidth: 0.5,
   },
-
+  textView:{
+    alignItems:'center'
+  },
   innerView: {
     backgroundColor:Color.primary,
     alignItems:'center',

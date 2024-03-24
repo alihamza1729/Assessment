@@ -174,8 +174,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: Constants.sizes.base,
     textAlign: 'left',
-    includeFontPadding: false
-
+    includeFontPadding: false,
+    color:Color.white
   },
   light:{
     fontFamily:Constants.fontFamilyRegular

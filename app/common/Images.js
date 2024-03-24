@@ -10,6 +10,7 @@ const Images = {
   user:require('../images/user.png'),
   backIcon:require('../images/back-withbackground.png'),
   profile:require('../images/profile.png'),
+  connector:require('../images/connector.png'),
 
 }
 

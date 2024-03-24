@@ -33,7 +33,7 @@ const styles = StyleSheet.create(
     },
     spliter: {
       height: 0.7,
-      backgroundColor: "#efefef",
+      backgroundColor: "#3A3940",
     },
     shadow: {
       shadowColor: "#000",
