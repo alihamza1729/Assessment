@@ -39,6 +39,7 @@ function MainScreen({}) {
 
   useEffect(() => {
     if (selectedTopic) {
+      setType(null)
       let array = selectedTopic.titles.map((item) => {
         return {
           label: item,
@@ -51,14 +52,14 @@ function MainScreen({}) {
   }, [selectedTopic]);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1,  backgroundColor: Color.primary }}>
       <ScrollView contentContainerStyle={StyleSheet.flatten([appStyle.container, {
         padding: 15,
         flexGrow: 1,
-        backgroundColor: Color.primary,
+
       }])}>
         {/*header*/}
-        <Header title={"Media management"} description={"Draft campaign"} />
+        <Header onPressProfile={()=>{}} title={"Media management"} description={"Draft campaign"} />
 
 
         {/*body*/}
@@ -66,7 +67,7 @@ function MainScreen({}) {
           {/* Step indicator */}
           <View style={StyleSheet.flatten([appStyle.row, { marginVertical: 20 }])}>
             <ScrollView
-              contentContainerStyle={{ marginStart: 5 }}
+              contentContainerStyle={{ marginStart: 5, }}
               showsHorizontalScrollIndicator={false}
               horizontal>
 
@@ -82,9 +83,10 @@ function MainScreen({}) {
                       source={item.icon}
                     />
 
+                    {index==STEP_ICONS.length-1?null:
                     <Connector
                       colors={index == 2 ? [Color.linearGradient.first, Color.linearGradient.second] : (index <= 1 ? [Color.green, Color.green] : [Color.secondaryColor, Color.secondaryColor])}
-                    />
+                    />}
                   </View>
 
                 );

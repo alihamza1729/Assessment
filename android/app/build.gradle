@@ -75,7 +75,7 @@ android {
 
     namespace "com.assessment"
     defaultConfig {
-        applicationId "com.assessment"
+        applicationId "com.kosmic.assessment"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
