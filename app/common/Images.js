@@ -11,6 +11,8 @@ const Images = {
   backIcon:require('../images/back-withbackground.png'),
   profile:require('../images/profile.png'),
   connector:require('../images/connector.png'),
+  arrowDown:require('../images/arrow-down.png'),
+  thumb:require('../images/thumb.png'),
 
 }
 

@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
 import appStyle from "./styles";
 import Color from "./common/Color";
 import Header from "./components/Header";
 import Images from "./common/Images";
-import CustomIconButton from "./components/CustomIconButton";
 import Connector from "./components/Connector";
 import TextElement from "./components/Text";
 import { topics } from "../data.json";
 import TagBtn from "./components/TagBtn";
 import BackgroundIcon from "./components/BackgroundIcon";
+import DropdownComponent from "./components/DropdownComponent";
+import RangeSlider from "./components/RangeSlider";
+import ButtonComponent from "./components/ButtonComponent";
 
 const STEP_ICONS = [
   {
@@ -31,94 +33,149 @@ const STEP_ICONS = [
 ];
 
 function MainScreen({}) {
+  const [type, setType] = useState(null);
+  const [selectedTopic, setSelectedTopic] = useState(topics[0]);
+  const [dropdownData, setDropdownData] = useState([]);
 
-  const [selectedTopic, setSelectedTop] = useState(topics[0]);
+  useEffect(() => {
+    if (selectedTopic) {
+      let array = selectedTopic.titles.map((item) => {
+        return {
+          label: item,
+          value: item,
+
+        };
+      });
+      setDropdownData(array);
+    }
+  }, [selectedTopic]);
 
   return (
-    <ScrollView contentContainerStyle={StyleSheet.flatten([appStyle.container, {
-      padding: 15,
-      flexGrow: 1,
-      backgroundColor: Color.primary,
-    }])}>
-      {/*header*/}
-      <Header title={"Media management"} description={"Draft campaign"} />
+    <View style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={StyleSheet.flatten([appStyle.container, {
+        padding: 15,
+        flexGrow: 1,
+        backgroundColor: Color.primary,
+      }])}>
+        {/*header*/}
+        <Header title={"Media management"} description={"Draft campaign"} />
 
-
-      {/*body*/}
-      <View style={appStyle.container}>
-        {/* Step indicator */}
-        <View style={StyleSheet.flatten([appStyle.row, { marginVertical: 20 }])}>
-          <ScrollView
-            contentContainerStyle={{ marginStart: 5 }}
-            showsHorizontalScrollIndicator={false}
-            horizontal>
-
-            {STEP_ICONS.map((item, index) => {
-              return (
-                <View style={[appStyle.rowAlign]}>
-                  <BackgroundIcon
-                    colors={index == 2 ? [Color.linearGradient.first, Color.linearGradient.second] : (index <= 1 ? [Color.green, Color.green] : [Color.secondaryColor, Color.secondaryColor])}
-                    iconStyle={styles.icon}
-                    containerStyle={[styles.iconContainer, {
-                      backgroundColor: index == 2 ? Color.purple : (index <= 1 ? Color.green : Color.secondaryColor),
-                    }]}
-                    source={item.icon}
-                  />
-
-                  <Connector
-                    colors={index == 2 ? [Color.linearGradient.first, Color.linearGradient.second] : (index <= 1 ? [Color.green, Color.green] : [Color.secondaryColor, Color.secondaryColor])}
-                  />
-                </View>
-
-              );
-            })}
-
-          </ScrollView>
-        </View>
 
         {/*body*/}
-        <View style={[appStyle.container, { padding: 15 }]}>
+        <View style={appStyle.container}>
+          {/* Step indicator */}
+          <View style={StyleSheet.flatten([appStyle.row, { marginVertical: 20 }])}>
+            <ScrollView
+              contentContainerStyle={{ marginStart: 5 }}
+              showsHorizontalScrollIndicator={false}
+              horizontal>
 
-          <View style={{ marginBottom: 20 }}>
-            <TextElement h4 medium h4Style={{}}>
-              Content type
-            </TextElement>
-            <TextElement h5 medium h5Style={{ color: Color.grey }}>
-              Choose a content type that best fits your needs.
-            </TextElement>
+              {STEP_ICONS.map((item, index) => {
+                return (
+                  <View style={[appStyle.rowAlign]}>
+                    <BackgroundIcon
+                      colors={index == 2 ? [Color.linearGradient.first, Color.linearGradient.second] : (index <= 1 ? [Color.green, Color.green] : [Color.secondaryColor, Color.secondaryColor])}
+                      iconStyle={styles.icon}
+                      containerStyle={[styles.iconContainer, {
+                        backgroundColor: index == 2 ? Color.purple : (index <= 1 ? Color.green : Color.secondaryColor),
+                      }]}
+                      source={item.icon}
+                    />
+
+                    <Connector
+                      colors={index == 2 ? [Color.linearGradient.first, Color.linearGradient.second] : (index <= 1 ? [Color.green, Color.green] : [Color.secondaryColor, Color.secondaryColor])}
+                    />
+                  </View>
+
+                );
+              })}
+
+            </ScrollView>
           </View>
-          <View style={appStyle.spliter} />
-          <View style={{ marginVertical: 20 }}>
-            <TextElement h4 medium h4Style={{}}>
-              What type of content are you creating?
-            </TextElement>
 
-            {/*Topics*/}
-            <View style={StyleSheet.flatten([appStyle.row, { flexWrap: "wrap", marginVertical: 20 }])}>
+          {/*body*/}
+          <View style={[appStyle.container, { padding: 15 }]}>
+
+            <View style={{ marginBottom: 20 }}>
+              <TextElement h4 medium h4Style={{}}>
+                Content type
+              </TextElement>
+              <TextElement h5 medium h5Style={{ color: Color.grey }}>
+                Choose a content type that best fits your needs.
+              </TextElement>
+            </View>
+            <View style={appStyle.spliter} />
+            <View style={{ marginVertical: 20 }}>
+              <TextElement h4 medium h4Style={{}}>
+                What type of content are you creating?
+              </TextElement>
+
+              {/*Topics*/}
+              <View style={StyleSheet.flatten([appStyle.row, { flexWrap: "wrap", marginVertical: 20 }])}>
 
 
-                {topics.map((item)=>
+                {topics.map((item) =>
                   <TagBtn
                     title={item.name}
-                    onPress={()=>{setSelectedTop(item)}}
-                    isSelected={item?.id===selectedTopic?.id}
+                    onPress={() => {
+                      setSelectedTopic(item);
+                    }}
+                    isSelected={item?.id === selectedTopic?.id}
                   />)}
+              </View>
             </View>
-          </View>
-          <View style={{marginBottom:20}}>
 
-            <TextElement h5 medium>
-              Which type of “Fun“content are you creating?
-            </TextElement>
+            {/*Types of discussion*/}
+            <View style={{ marginBottom: 20 }}>
+
+              <TextElement h5 medium>
+                {`Which type of "${selectedTopic?.name}" content are you creating?`}
+              </TextElement>
+
+
+              <DropdownComponent
+                data={dropdownData}
+                value={type}
+                setValue={(value) => {
+                  setType(value);
+                }}
+
+              />
+            </View>
+
+            {/*Words Range Slider*/}
+
+            <View style={{ marginBottom: 20 }}>
+
+              <TextElement h5 medium>
+                {`Set the number of words for output text.`}
+              </TextElement>
+
+              <RangeSlider
+                setLow={(low) => {
+
+                }}
+                setHigh={(high) => {
+
+                }}
+              />
+            </View>
+
           </View>
 
 
         </View>
 
+      </ScrollView>
 
+      {/*button*/}
+      <View style={{margin:20}}>
+      <ButtonComponent
+        onPress={()=>{}}
+        style={{}}
+      />
       </View>
-
-    </ScrollView>
+    </View>
   );
 
 }

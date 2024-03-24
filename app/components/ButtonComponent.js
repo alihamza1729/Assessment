@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import TextElement from "./Text";
 import Color from "../common/Color";
 import LinearGradient from "react-native-linear-gradient";
@@ -13,13 +13,7 @@ const ButtonComponent = ({ onPress, textStyle, style, title = "Next" }) => {
       onPress={onPress}
       style={[appStyle.rowAlign, styles.container, style]}>
       <View style={styles.rowView}>
-        <MaskedViewIOS maskElement={<TextElement h5 medium />}>
-          <LinearGradient colors={[Color.linearGradient.first, Color.linearGradient.second]} start={{ x: 0, y: 0 }}
-                          end={{ x: 1, y: 0 }}>
-            <TextElement h5 medium h5Style={[{ opacity: 0 }, textStyle]}>{title}</TextElement>
-          </LinearGradient>
-        </MaskedViewIOS>
-
+        <TextElement h5 medium h5Style={[{ color: Color.purple }, textStyle]}>{title}</TextElement>
       </View>
       <Image
         style={styles.icon}
@@ -30,16 +24,17 @@ const ButtonComponent = ({ onPress, textStyle, style, title = "Next" }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    padding: 15,
     marginVertical: 20,
-    borderRadius: 20,
+    borderRadius: 24,
+    backgroundColor: Color.white,
   },
   rowView: {
     flex: 1,
   },
-  icon:{
-    width:scale(14),
-    height:scale(14),
-  }
+  icon: {
+    width: scale(14),
+    height: scale(14),
+  },
 });
 export default ButtonComponent;
