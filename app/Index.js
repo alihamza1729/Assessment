@@ -94,7 +94,7 @@ function MainScreen({}) {
           </View>
 
           {/*body*/}
-          <View style={[appStyle.container, { padding: 15 }]}>
+          <View style={[appStyle.container, { padding: 10 }]}>
 
             <View style={{ marginBottom: 20 }}>
               <TextElement h4 medium h4Style={{}}>
