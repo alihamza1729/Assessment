@@ -7,7 +7,9 @@ const Images = {
   help:require('../images/help-circle.png'),
   nextArrow:require('../images/next-arrow.png'),
   target:require('../images/target.png'),
-  user:require('../images/user.png')
+  user:require('../images/user.png'),
+  backIcon:require('../images/back-withbackground.png'),
+  profile:require('../images/profile.png'),
 
 }
 

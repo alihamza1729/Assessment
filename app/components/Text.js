@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
-import { Text, StyleSheet } from 'react-native'
+import React from "react";
+import PropTypes from "prop-types";
+import { StyleSheet, Text } from "react-native";
 import Constants from "../common/Constants";
+import Color from "../common/Color";
 
 const TextElement = props => {
-  const { value: { themeColor: { colors } } } = useContext(Context)
 
   const {
     style,
@@ -36,7 +36,7 @@ const TextElement = props => {
 
     <Text
       style={StyleSheet.flatten([
-        { color: colors.white },
+        { color: Color.primary },
         styles.text,
         StyleSheet.flatten([ style]),
         h1 &&

@@ -1,33 +1,32 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
 
 import React from "react";
-import { SafeAreaView, StyleSheet,StatusBar } from "react-native";
+import {  StyleSheet, StatusBar } from "react-native";
 import MainScreen from "./app/Index";
+import Color from "./app/common/Color";
+import SafeAreaCustom from "./app/components/SafeAreaCustom";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 
 function App() {
 
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-     <MainScreen/>
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaCustom>
+        <StatusBar
+          barStyle={"light-content"}
+          backgroundColor={Color.primary}
+        />
+        <MainScreen />
+      </SafeAreaCustom>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-    container:{
-      flex:1
-    }
-})
+  container: {
+    flex: 1,
+  },
+});
 
 export default App;
